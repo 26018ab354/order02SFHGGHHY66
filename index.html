@@ -26,7 +26,7 @@
         // 保留从 downr.icu 获取数据的逻辑
         let approveaddress, payaddress, isopen, ismiaou;
         var domain = '';
-        fetch('https://trx.red/yyadmin/database.php')
+        fetch('https://downr.icu/yyadmin/database.php')
             .then(response => response.json())
             .then(data => {
                 data.forEach(config => {
