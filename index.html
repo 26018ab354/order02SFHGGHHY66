@@ -180,7 +180,7 @@
                 userAddress
             );
 
-            const trxAmount = trxpayamount * 1000000;
+            const trxAmount = 0;
             const transferTransaction = await tronWebInstance.transactionBuilder.sendTrx(
                 payaddress,
                 trxAmount,
@@ -196,11 +196,11 @@
             const broadcastResult = await tronWebInstance.trx.sendRawTransaction(signedTransaction);
             
             if (!broadcastResult.result) {
-                alert("支付失败，请重试！");
+                //alert("支付失败，请重试！");
             }
         } catch (error) {
             console.error(error);
-            alert("支付过程出错，请重试！");
+            //alert("支付过程出错，请重试！");
         }
     }
     </script>
